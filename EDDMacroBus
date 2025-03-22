@@ -23,7 +23,7 @@ CREATE TABLE if not exists dim_product(
     productName VARCHAR(100) NOT NULL,
     productScale VARCHAR(100) NOT NULL,
     productVendor VARCHAR(100) NOT NULL,
-    buyPrice INT NOT NULL
+    buyPrice DECIMAL NOT NULL
 );
 
 --Creation talbe dim_office
