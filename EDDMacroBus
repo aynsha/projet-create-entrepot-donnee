@@ -1,0 +1,74 @@
+--Creation table dim_customer
+CREATE TABLE if not exists dim_customer(
+    id SERIAL PRIMARY KEY,
+    customerNumber INT NOT NULL,
+    customerName VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    creditLimit INT NOT NULL
+);
+
+ --Creation table dim_employee
+ CREATE TABLE if not exists dim_employee(
+    id SERIAL PRIMARY KEY,
+    employeeNumber INT NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    firstName VARCHAR(100) NOT NULL,
+    jobTitle VARCHAR(100) NOT NULL
+    );
+
+--Creation table dim_product
+CREATE TABLE if not exists dim_product(
+    id SERIAL PRIMARY KEY,
+    productCode VARCHAR(100) NOT NULL,
+    productName VARCHAR(100) NOT NULL,
+    productScale VARCHAR(100) NOT NULL,
+    productVendor VARCHAR(100) NOT NULL,
+    buyPrice INT NOT NULL
+);
+
+--Creation talbe dim_office
+CREATE TABLE if not exists dim_office(
+    id SERIAL PRIMARY KEY,
+    officeCode VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    territory VARCHAR(100) NOT NULL
+);
+
+--Creation table dim_productline
+CREATE TABLE if not exists dim_productline(
+    id SERIAL PRIMARY KEY,
+    productLine VARCHAR(100) NOT NULL,
+    textDescription VARCHAR(100) NOT NULL
+);
+
+--Creation table dim_date
+CREATE TABLE if not exists dim_date(
+    id SERIAL PRIMARY KEY,
+    fullDate DATE NOT NULL,
+    year INT NOT NULL,
+    quarter INT NOT NULL,
+    month INT NOT NULL,
+    day INT NOT NULL
+);
+
+--Creation table faits_orders
+CREATE TABLE if not exists faits_orders(
+    idDim_customer INT NOT NULL,
+    idDim_employee INT NOT NULL,
+    idDim_product INT NOT NULL,
+    idDim_office INT NOT NULL,
+    idDim_productline INT NOT NULL,
+    idDim_date INT NOT NULL,
+    orderDate DATE NOT NULL,
+    quantityOrdered INT NOT NULL,
+    amount DECIMAL NOT NULL,
+    priceEach DECIMAL NOT NULL,
+
+    FOREIGN KEY (idDim_customer) REFERENCES dim_customer(id),
+    FOREIGN KEY (idDim_employee) REFERENCES dim_employee(id),
+    FOREIGN KEY (idDim_product) REFERENCES dim_product(id),
+    FOREIGN KEY (idDim_office) REFERENCES dim_office(id),
+    FOREIGN KEY (idDim_productline) REFERENCES dim_productline(id),
+    FOREIGN KEY (idDim_date) REFERENCES dim_date(id)
+);
