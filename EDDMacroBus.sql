@@ -62,7 +62,7 @@ CREATE TABLE if not exists faits_orders(
     idDim_date INT NOT NULL,
     orderDate DATE NOT NULL,
     quantityOrdered INT NOT NULL,
-    amount DECIMAL NOT NULL,
+    totalAmount DECIMAL NOT NULL,
     priceEach DECIMAL NOT NULL,
 
     FOREIGN KEY (idDim_customer) REFERENCES dim_customer(id),
