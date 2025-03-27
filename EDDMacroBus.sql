@@ -1,34 +1,41 @@
+--Creation de l'entrepot de données
+CREATE DATABASE MacroBusDW;
+USE MacroBusDW;
+
 --Creation table dim_customer
-CREATE TABLE if not exists dim_customer(
-    id SERIAL PRIMARY KEY,
+CREATE TABLE dim_customer(
+    id INT IDENTITY(1,1) PRIMARY KEY,
     customerNumber INT NOT NULL,
     customerName VARCHAR(100) NOT NULL,
     country VARCHAR(100) NOT NULL,
-    creditLimit INT NOT NULL
+    creditLimit INT NOT NULL,
+    salesRepEmployeeNumber INT NOT NULL
 );
 
  --Creation table dim_employee
- CREATE TABLE if not exists dim_employee(
-    id SERIAL PRIMARY KEY,
+ CREATE TABLE  dim_employee(
+    id INT IDENTITY(1,1) PRIMARY KEY,
     employeeNumber INT NOT NULL,
     lastName VARCHAR(100) NOT NULL,
     firstName VARCHAR(100) NOT NULL,
-    jobTitle VARCHAR(100) NOT NULL
+    jobTitle VARCHAR(100) NOT NULL,
+    officeCode INT NOT NULL
     );
 
 --Creation table dim_product
-CREATE TABLE if not exists dim_product(
-    id SERIAL PRIMARY KEY,
+CREATE TABLE  dim_product(
+    id INT IDENTITY(1,1) PRIMARY KEY,
     productCode VARCHAR(100) NOT NULL,
     productName VARCHAR(100) NOT NULL,
     productScale VARCHAR(100) NOT NULL,
     productVendor VARCHAR(100) NOT NULL,
-    buyPrice DECIMAL NOT NULL
+    buyPrice DECIMAL NOT NULL,
+    productLine VARCHAR(100) NOT NULL
 );
 
 --Creation talbe dim_office
-CREATE TABLE if not exists dim_office(
-    id SERIAL PRIMARY KEY,
+CREATE TABLE  dim_office(
+    id INT IDENTITY(1,1) PRIMARY KEY,
     officeCode VARCHAR(100) NOT NULL,
     city VARCHAR(100) NOT NULL,
     country VARCHAR(100) NOT NULL,
@@ -36,15 +43,15 @@ CREATE TABLE if not exists dim_office(
 );
 
 --Creation table dim_productline
-CREATE TABLE if not exists dim_productline(
-    id SERIAL PRIMARY KEY,
+CREATE TABLE  dim_productline(
+    id INT IDENTITY(1,1) PRIMARY KEY,
     productLine VARCHAR(100) NOT NULL,
-    textDescription VARCHAR(100) NOT NULL
+    textDescription VARCHAR(1000) NOT NULL
 );
 
 --Creation table dim_date
-CREATE TABLE if not exists dim_date(
-    id SERIAL PRIMARY KEY,
+CREATE TABLE  dim_date(
+    id INT IDENTITY(1,1) PRIMARY KEY,
     fullDate DATE NOT NULL,
     year INT NOT NULL,
     quarter INT NOT NULL,
@@ -53,7 +60,7 @@ CREATE TABLE if not exists dim_date(
 );
 
 --Creation table faits_orders
-CREATE TABLE if not exists faits_orders(
+CREATE TABLE  faits_orders(
     idDim_customer INT NOT NULL,
     idDim_employee INT NOT NULL,
     idDim_product INT NOT NULL,
